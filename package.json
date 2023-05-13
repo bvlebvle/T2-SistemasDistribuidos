@@ -1,0 +1,27 @@
+{
+  "name": "t2-sistemasdistribuidos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bvlebvle/T2-SistemasDistribuidos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bvlebvle/T2-SistemasDistribuidos/issues"
+  },
+  "homepage": "https://github.com/bvlebvle/T2-SistemasDistribuidos#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
