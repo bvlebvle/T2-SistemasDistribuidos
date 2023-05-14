@@ -1,8 +1,6 @@
 const { stringify } = require("querystring");
 const { parentPort } = require("worker_threads");
 
-const timestamp = Date.now();
-
 function crear_data() {
 	const caractares = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	const length = Math.floor(Math.random() * 50);
@@ -12,14 +10,20 @@ function crear_data() {
 	}
 	return text;
 }
-const data = crear_data();
+function enviar_data() {
+	for (let i = 0; i < 2; i++) {
+		const data = crear_data();
+		const timestamp = Date.now();
 
-const log = parentPort.on("message", (msg) => {
-	console.log("Device " + msg + " Tiempo de envio " + timestamp + " sending: " + data);
-	const json = {
-		Device: msg,
-		Timestamp: timestamp,
-		Data: data
-	};
-	console.log(JSON.stringify(json));
-});
+		const log = parentPort.on("message", (msg) => {
+			console.log("Enviando datos al servidor...");
+			const json = {
+				Device: msg,
+				Timestamp: timestamp,
+				Data: data
+			};
+			console.log(JSON.stringify(json));
+		});
+	}
+}
+setInterval(enviar_data, 5000);

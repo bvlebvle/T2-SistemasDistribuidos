@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const { Worker } = require("worker_threads");
 const app = express();
 
-for (let i = 0; i < 1; i++) {
+for (let i = 0; i < 10; i++) {
 	const worker = new Worker("./worker.js");
 	worker.postMessage(i);
 }
