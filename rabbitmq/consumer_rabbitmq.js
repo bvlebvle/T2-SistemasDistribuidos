@@ -1,4 +1,5 @@
 const amp = require("amqplib");
+const { workerData } = require("worker_threads");
 const { json } = require("express");
 
 const rabbitSettings = {
@@ -30,8 +31,14 @@ async function connect() {
 
 		channel.consume(queue, (msg) => {
 			let mensaje_consumido = JSON.parse(msg.content.toString());
+			const id_consumer = workerData.id;
+
+			console.log("---------------------------------------");
+			console.log("ID de consumidor: " + id_consumer);
 			console.log(mensaje_consumido);
-			//console.log("Recibido " + mensaje_consumido);
+			console.log("");
+			//para elidir el mensaje
+			channel.ack(msg);
 		});
 	} catch (err) {
 		console.log("Error al conectar " + err);

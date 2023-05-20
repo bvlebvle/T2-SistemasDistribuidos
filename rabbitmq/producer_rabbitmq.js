@@ -19,7 +19,6 @@ function crear_json() {
 	const data = crear_data();
 	const timestamp = Date.now();
 	const json = {
-		Device: workerData.id,
 		Timestamp: timestamp,
 		Data: data
 	};
@@ -51,13 +50,12 @@ async function connect() {
 
 		const res = await channel.assertQueue(queue);
 		console.log("Cola creada");
-
-		for (let i = 0; i < 2; i++) {
+		setInterval(() => {
 			const msg = crear_json();
 			channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg)));
-
-			console.log("Enviando mensaje...");
-		}
+			console.log("Enviando mensaje, Device ID: " + workerData.id);
+			console.log(JSON.stringify(msg));
+		}, 500);
 	} catch (err) {
 		console.log("Error al conectar " + err);
 	}
